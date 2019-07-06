@@ -5,15 +5,19 @@ Can be repurposed for a different set of symbols by replacing elements_dict.txt
 
 import string
 
-# Preassemble symbol dictionary
-SYMBOLS = {}
-with open("elements.csv", "r") as file:
-    for line in file.readlines():
-        symbol, full = line.rstrip().split(",")
-        SYMBOLS[symbol.lower()] = full
+
+def load_symbols(path="elements.csv"):
+    """Puts together a symbol dictionary from a .csv file."""
+    symbols = {}
+    with open(path, "r") as file:
+        for line in file.readlines():
+            symbol, full = line.rstrip().split(",")
+            symbols[symbol.lower()] = full
+
+    return symbols
 
 
-def encode(message: str):
+def encode(message: str, symbols: dict):
     """Encode a message using the symbol dictionary.
     Preference is given to minimizing repetitions of symbols.
     """
@@ -44,7 +48,7 @@ def encode(message: str):
 
             # Check if each option is actually a symbol
             for option in options:
-                if option in SYMBOLS:
+                if option in symbols:
                     queue.append(
                         (
                             partial + option.capitalize(),  # Proper element format
@@ -56,7 +60,7 @@ def encode(message: str):
     try:
         sortkey = lambda x: (x[2], len(x[1]))
         bestencode = min(encodings, key=sortkey)
-        return bestencode[0], [SYMBOLS[s] for s in bestencode[1]]
+        return bestencode[0], [symbols[s] for s in bestencode[1]]
 
     except ValueError:
         raise SymbolError(

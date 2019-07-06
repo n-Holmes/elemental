@@ -1,7 +1,7 @@
 # elemental
 A simple command line tool to encode text as a series of element symbols.
 
-For example the word *satire* may be written *SAtIRe* where *S*, *At*, *I* and *Re* are the chemical symbols for *Sulfur*, *Astatine*, *Iodine* and *Rhenium*, respectively.  The tool will avoid reusing elements as much as possible to give a more interesting output, so 
+For example the word *satire* may be written *SAtIRe* where *S*, *At*, *I* and *Re* are the chemical symbols for *Sulfur*, *Astatine*, *Iodine* and *Rhenium*, respectively.  The tool will avoid reusing elements as much as possible to give a more varied output, so "*noses noses*" encodes as "*NOsEs NoSeS*", using six different elements.
 
 ## Usage
 To convert short snippets, you can pass the text using the flag `-s`:
