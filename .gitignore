@@ -1,0 +1,8 @@
+# Compiled python
+*__pycache__ 
+
+# Test cache
+.pytest_cache
+
+# virtual environment
+*_env
