@@ -7,7 +7,7 @@ import string
 
 # Preassemble symbol dictionary
 SYMBOLS = {}
-with open("elements_dict.txt", "r") as file:
+with open("elements.csv", "r") as file:
     for line in file.readlines():
         symbol, full = line.rstrip().split(",")
         SYMBOLS[symbol.lower()] = full
