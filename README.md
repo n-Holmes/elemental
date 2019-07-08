@@ -8,7 +8,7 @@ To convert short snippets, you can pass the text using the flag `-s`:
 
     element_code.py -s/--string "some text"
 
-As most words in the english language are not writable using the standard element symbols, by omitting flags the tool can be run in interactive mode for faster testing:
+As most words in the english language (around 80%) are not writable using the standard element symbols, by omitting flags the tool can be run in interactive mode for faster testing:
 
     element_code.py
 
@@ -22,6 +22,9 @@ If the file can be fully encoded, the tool will create two new files for its out
 * `somefilepath_elements.txt`: contains the list of elements used, in order.
 
 Due to the high failure rate, it is strongly suggested to run on short snippets of a text before attempting an entire file.
+
+## Common words
+The file `common_encodable_words.txt` contains a list of a thousand common words (according to the Google Trillion Word Corpus) which can be encoded by the tool. This might be helpful for anyone searching for sentences.
 
 ## Configuration
 The encoder uses the symbols listed in `elements.csv`, so a different set of symbols can be used by editing this file. Symbol matching is case-insensitive and later copies of the same symbol will overwrite earlier ones.
