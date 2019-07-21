@@ -35,27 +35,34 @@ def encode(message: str, symbols: dict):
         plen = len(partial)
         if plen == n:
             encodings.append((partial, symlist, score))
+            continue
 
-        # Deal with non-alphabetical characters
-        elif message[plen].lower() not in string.ascii_lowercase:
-            queue.append((partial + message[plen], symlist, score))
-
+        # Find the next letter
+        for i, char in enumerate(message[plen:]):
+            if char.isalpha():
+                break
         else:
-            # Possible next symbols
-            options = [message[plen].lower()]
-            if n - plen >= 2:
-                options.append(message[plen : plen + 2].lower())
+            encodings.append((partial + message[plen:], symlist, score))
+            continue
+        
+        partial += message[plen:plen + i]
+        plen += i
 
-            # Check if each option is actually a symbol
-            for option in options:
-                if option in symbols:
-                    queue.append(
-                        (
-                            partial + option.capitalize(),  # Proper element format
-                            symlist + [option],
-                            score + symlist.count(option),
-                        )
+        # Possible next symbols
+        options = [message[plen].lower()]
+        if n - plen >= 2:
+            options.append(message[plen : plen + 2].lower())
+
+        # Check if each option is actually a symbol
+        for option in options:
+            if option in symbols:
+                queue.append(
+                    (
+                        partial + option.capitalize(),  # Proper element format
+                        symlist + [option],
+                        score + symlist.count(option),
                     )
+                )
 
     try:
         sortkey = lambda x: (x[2], len(x[1]))
